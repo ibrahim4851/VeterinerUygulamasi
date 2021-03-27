@@ -1,6 +1,8 @@
 package com.example.veterineruygulamas.Activities.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,16 +29,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getFragment();
+        change();
         tanimla();
         kontrol();
         action();
     }
 
-    private void getFragment()
+    public void change()
     {
-        changeFragments = new ChangeFragments(MainActivity.this);
-        changeFragments.change(new HomeFragment());
+        Fragment newFragment = new HomeFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.mainFrameLayout, newFragment);
+        transaction.disallowAddToBackStack();
+        transaction.commit();
     }
 
     public void tanimla()
